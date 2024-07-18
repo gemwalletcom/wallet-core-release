@@ -1,0 +1,37 @@
+name: Create Release
+
+on:
+  push:
+    paths:
+      - ".workflows/release.yml"
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "wallet core release version"
+        required: true
+
+jobs:
+  upload_assets:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Set version tag
+        run: |
+          if [ ${{ github.event.inputs.version }} ]; then
+            echo "VER_NAME=${{ github.event.inputs.version }}" >> $GITHUB_ENV
+          else
+            echo "no version"
+          fi
+
+      - name: Download from GPR
+        run: |
+          ./download.sh ${{ env.VER_NAME }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload to release
+        run: |
+          gh release create ${{ env.VER_NAME }} --title ${{ env.VER_NAME }} --notes "Wallet Core Android" --draft
+          cd ${{ env.VER_NAME }} && gh release upload ${{ env.VER_NAME }} ./*.aar ./*.jar ./*.sha1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
