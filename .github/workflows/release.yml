@@ -6,6 +6,8 @@ on:
       version:
         description: "wallet core release version"
         required: true
+permissions:
+  contents: write
 
 jobs:
   upload_assets:
@@ -32,3 +34,10 @@ jobs:
           cd ${{ env.VER_NAME }} && gh release upload ${{ env.VER_NAME }} ./*.aar ./*.jar ./*.sha1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Commit Package.swift
+        run: |
+          cp ${{ env.VER_NAME }}/Package.swift .
+          git add ./Package.swift
+          git commit "Update Package.swift ${{ env.VER_NAME }}"
+          git push 

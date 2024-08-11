@@ -37,6 +37,10 @@ download_artifact() {
     done
 }
 
+download_package_swift() {
+    wget_with_auth https://github.com/trustwallet/wallet-core/releases/download/${VERSION}/Package.swift
+}
+
 download_wallet_core() {
     echo "==> Downloading Wallet Core $VERSION"
     artifact_id=wallet-core
@@ -53,5 +57,6 @@ download_wallet_core_proto() {
 
 download_wallet_core
 download_wallet_core_proto
+download_package_swift
 
 echo "<== Done."
