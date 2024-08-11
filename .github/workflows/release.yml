@@ -39,5 +39,5 @@ jobs:
         run: |
           cp ${{ env.VER_NAME }}/Package.swift .
           git add ./Package.swift
-          git commit "Update Package.swift ${{ env.VER_NAME }}"
+          git commit -m "Update Package.swift ${{ env.VER_NAME }}"
           git push 
