@@ -37,9 +37,9 @@ jobs:
 
       - name: Commit Package.swift
         run: |
-          cp ${{ env.VER_NAME }}/Package.swift .
+          mv ${{ env.VER_NAME }}/Package.swift .
+          rm -rf ${{ env.VER_NAME }}
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config user.name "github-actions[bot]"
-          git add ./Package.swift
-          git commit -m "Update Package.swift ${{ env.VER_NAME }}"
-          git push 
+          git commit -a -m "Update Package.swift ${{ env.VER_NAME }}"
+          git push
