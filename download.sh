@@ -38,6 +38,7 @@ download_artifact() {
 }
 
 download_package_swift() {
+    echo "==> Downloading Package.swift"
     wget_with_auth https://github.com/trustwallet/wallet-core/releases/download/${VERSION}/Package.swift
 }
 

@@ -22,7 +22,7 @@ jobs:
             echo "no version"
           fi
 
-      - name: Download from GPR
+      - name: Download artifacts
         run: |
           ./download.sh ${{ env.VER_NAME }}
         env:
