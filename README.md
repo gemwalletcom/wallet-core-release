@@ -4,6 +4,7 @@ This repository mirrors built artifacts for the Trust Wallet Core Android releas
 
 ## Versions
 
+- 4.1.7
 - 4.1.5
 - 4.1.4
 - 4.0.42
